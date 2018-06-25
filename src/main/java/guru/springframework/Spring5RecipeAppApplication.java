@@ -10,6 +10,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -40,6 +41,7 @@ public class Spring5RecipeAppApplication {
 		private NotesRepository notesRepository;
 
 		@Override
+		@Transactional//The @ManyToMany reverse side of the bidirectional mapping wouldn't work without this annoatation @Transactional.
 		public void run(String... args) throws Exception {
 			Recipe recipe=new Recipe();
 			recipe.setDescription("Dummy Recipe");
@@ -71,10 +73,10 @@ public class Spring5RecipeAppApplication {
 
 			recipesRepository.save(recipe);
             recipesRepository.save(tacos);
-			Optional<Ingredient> ingredientOptional = ingredientRepository.findById(2L);
-			System.out.println(ingredientOptional.get().getRecipe().getDescription());
+            //The following statements are to verify the other side of the bidirectional mapping.
+			System.out.println(ingredientRepository.findByDescription("Dummy Ingredient").getRecipe().getDescription());
 			System.out.println(notesRepository.findByValue("Note").getRecipe().getDescription());
-//			System.out.println(categoryRepository.findByName("Dummy Category").get().getRecipes().iterator().next().getDescription()); //Couldn't make this work
+			System.out.println(categoryRepository.findByName("Dummy Category").get().getRecipes().iterator().next().getDescription()); //Couldn't make this work
 
 		}
 	}

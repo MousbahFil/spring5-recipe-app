@@ -1,8 +1,12 @@
 package guru.springframework.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+
 import javax.persistence.*;
 
 @Entity
+@Data
 public class Notes {
 
     @Id
@@ -11,6 +15,7 @@ public class Notes {
     private String value;
 
     @OneToOne
+    @JsonIgnore
     private Recipe recipe;
 
     public Notes() {
@@ -20,27 +25,4 @@ public class Notes {
         this.value = value;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public Recipe getRecipe() {
-        return recipe;
-    }
-
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
-    }
 }
