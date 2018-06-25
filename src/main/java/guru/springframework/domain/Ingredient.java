@@ -1,11 +1,12 @@
 package guru.springframework.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Objects;
 
 @Entity
 @Data

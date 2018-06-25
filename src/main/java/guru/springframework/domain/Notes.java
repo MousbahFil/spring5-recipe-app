@@ -7,6 +7,8 @@ import javax.persistence.*;
 
 @Entity
 @Data
+@EqualsAndHashCode(of = "id")
+@ToString(exclude = "recipe")
 public class Notes {
 
     @Id
