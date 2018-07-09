@@ -42,4 +42,9 @@ public class RecipeServiceImpl implements RecipeService {
 
         return recipeOptional.get();
     }
+
+    @Override
+    public void saveRecipe(Recipe recipe) {
+        recipeRepository.save(recipe);
+    }
 }
